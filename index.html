@@ -303,20 +303,6 @@ const carrinho = {};
 const dinheiro = n => n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 
 function mostrarProdutos() {
-  const fotos = {
-    1: "https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=80",
-    2: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
-    3: "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&fit=crop&w=800&q=80",
-    4: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80",
-    5: "https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=80",
-    6: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
-    7: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80",
-    8: "https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=800&q=80",
-    9: "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80",
-    10: "https://images.unsplash.com/photo-1532634896-26909d0d4b79?auto=format&fit=crop&w=800&q=80",
-    11: "https://images.unsplash.com/photo-1523362628745-0c100150b504?auto=format&fit=crop&w=800&q=80"
-  };
-
   ["pizzas", "doces", "bebidas"].forEach(cat => {
     const area = document.getElementById("lista-" + cat);
     area.innerHTML = "";
@@ -326,15 +312,17 @@ function mostrarProdutos() {
       el.className = "item";
 
       const img = document.createElement("img");
-      img.src = fotos[p.id];
+      img.className = "foto-produto";
+      img.src = p.foto || "";
       img.alt = p.nome;
       img.loading = "lazy";
+
       img.onerror = () => {
         img.style.display = "none";
       };
 
       const info = document.createElement("div");
-      info.className = "item-info";
+      info.className = "info-produto";
 
       const nome = document.createElement("h3");
       nome.textContent = p.nome;
@@ -342,22 +330,21 @@ function mostrarProdutos() {
       const desc = document.createElement("p");
       desc.textContent = p.desc;
 
-      const bottom = document.createElement("div");
-      bottom.className = "item-bottom";
+      info.append(nome, desc);
 
-      const preco = document.createElement("span");
-      preco.className = "preco";
-      preco.textContent = dinheiro(p.preco);
+      const lado = document.createElement("div");
+      lado.className = "preco";
+
+      const valor = document.createElement("span");
+      valor.textContent = dinheiro(p.preco);
 
       const btn = document.createElement("button");
       btn.className = "adicionar";
       btn.textContent = "+ Adicionar";
       btn.onclick = () => adicionar(p.id);
 
-      info.append(nome, desc);
-      bottom.append(preco, btn);
-      info.appendChild(bottom);
-      el.append(img, info);
+      lado.append(valor, btn);
+      el.append(img, info, lado);
       area.appendChild(el);
     });
   });
