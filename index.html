@@ -591,17 +591,16 @@ function enviarPedido() {
   // Exemplo fictício: 5511959566808
   const WHATSAPP_DA_PIZZARIA = "5511959566808";
 
-  if (!/^\d{10,15}$/.test(WHATSAPP_DA_PIZZARIA)) {
-    alert("Configure o número do WhatsApp da pizzaria no código para receber pedidos.");
-    return;
-  }
-
-  window.open(
-    "https://wa.me/" + WHATSAPP_DA_PIZZARIA +
-    "?text=" + encodeURIComponent(msg),
-    "_blank"
-  );
+if (!/^\d{12,13}$/.test(WHATSAPP_DA_PIZZARIA)) {
+  alert("Confira o número do WhatsApp com DDI e DDD.");
+  return;
 }
+
+window.open(
+  "https://wa.me/" + WHATSAPP_DA_PIZZARIA +
+  "?text=" + encodeURIComponent(msg),
+  "_blank"
+);
 
 document.getElementById("tipo").addEventListener(
   "change",
