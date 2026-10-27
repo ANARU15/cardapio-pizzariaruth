@@ -4,7 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#183f32">
 <title>La Bella Ruth | Cardápio</title>
+
 <style>
 :root {
   --verde: #183f32;
@@ -13,6 +15,7 @@
   --texto: #302c25;
 }
 * { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
   margin: 0;
   background: var(--creme);
@@ -21,7 +24,7 @@ body {
 }
 header {
   text-align: center;
-  padding: 38px 16px 28px;
+  padding: 42px 16px 32px;
   background: var(--verde);
   color: white;
   border-bottom: 4px solid var(--dourado);
@@ -32,82 +35,181 @@ header {
   font: 12px Arial, sans-serif;
   text-transform: uppercase;
 }
-h1 { font-size: clamp(34px, 8vw, 54px); margin: 13px 0 8px; }
+h1 { font-size: clamp(36px, 8vw, 56px); margin: 13px 0 8px; }
 header p { margin: 0; color: #f2e7d0; font-style: italic; }
-main { max-width: 760px; margin: auto; padding: 22px 16px 50px; }
-.intro { text-align: center; line-height: 1.6; margin: 10px 0 26px; }
+main { max-width: 1000px; margin: auto; padding: 22px 16px 50px; }
+.intro { text-align: center; line-height: 1.7; margin: 15px 0 28px; }
 nav {
   display: flex; flex-wrap: wrap; gap: 8px;
-  justify-content: center; margin: 20px 0 30px;
+  justify-content: center; margin: 20px 0 35px;
 }
-nav button {
-  background: transparent; border: 1px solid var(--verde);
-  color: var(--verde); padding: 10px 14px; border-radius: 22px;
-  cursor: pointer; font-weight: bold;
+nav a {
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid var(--verde);
+  color: var(--verde);
+  padding: 10px 14px;
+  border-radius: 22px;
+  cursor: pointer;
+  font: bold 13px Arial, sans-serif;
 }
-nav button:hover, nav button:focus {
-  background: var(--verde); color: white;
-}
+nav a:hover { background: var(--verde); color: white; }
 h2 {
   color: var(--verde); text-align: center;
-  font-size: 27px; margin: 30px 0 7px;
+  font-size: 29px; margin: 35px 0 7px;
 }
-.sub { text-align: center; color: #766b59; font-style: italic; margin-bottom: 22px; }
+.sub {
+  text-align: center;
+  color: #766b59;
+  font-style: italic;
+  margin-bottom: 23px;
+}
+.lista-produtos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
 .item {
-  display: flex; justify-content: space-between; gap: 14px;
-  padding: 17px 0; border-bottom: 1px dashed #d8cbb5;
+  min-width: 0;
+  background: white;
+  border: 1px solid #e4d8c4;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px #183f3210;
+  transition: transform .2s;
 }
-.item h3 { margin: 0 0 6px; font-size: 19px; }
-.item p { margin: 0; color: #71685b; font: 14px/1.5 Arial, sans-serif; }
-.preco { color: var(--verde); font-weight: bold; white-space: nowrap; font-size: 17px; }
+.item:hover { transform: translateY(-3px); }
+.foto-container {
+  height: 200px;
+  background: #eee4d5;
+  overflow: hidden;
+}
+.item img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.item-info { padding: 15px; }
+.item h3 {
+  margin: 0 0 8px;
+  color: var(--verde);
+  font-size: 19px;
+}
+.item p {
+  margin: 0 0 15px;
+  color: #71685b;
+  font: 13px/1.6 Arial, sans-serif;
+  min-height: 42px;
+}
+.item-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.preco {
+  color: var(--verde);
+  font: bold 17px Arial, sans-serif;
+  white-space: nowrap;
+}
 .adicionar {
-  display: block; margin-top: 9px; margin-left: auto;
-  padding: 7px 11px; background: var(--verde); color: white;
-  border: 0; border-radius: 5px; cursor: pointer;
+  padding: 10px 11px;
+  background: var(--verde);
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
 }
+.adicionar:hover { background: var(--dourado); color: #201b12; }
 .pedido {
-  background: white; border: 1px solid #e4d8c4; border-radius: 12px;
-  padding: 20px; margin-top: 35px;
+  background: white;
+  border: 1px solid #e4d8c4;
+  border-radius: 12px;
+  padding: 22px;
+  margin-top: 40px;
 }
 .pedido h2 { margin-top: 0; }
 .linha-carrinho {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 10px; padding: 10px 0; border-bottom: 1px solid #eee4d5;
-  font: 14px Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee4d5;
+  font: 14px/1.5 Arial, sans-serif;
 }
-.linha-carrinho button {
-  border: 0; background: #f3e8d7; padding: 5px 9px;
-  border-radius: 4px; cursor: pointer;
+.controles { display: flex; align-items: center; gap: 6px; }
+.controles button {
+  border: 0;
+  background: #f3e8d7;
+  color: var(--verde);
+  padding: 7px 10px;
+  border-radius: 4px;
+  cursor: pointer;
 }
-.campo { margin-top: 14px; }
+.controles .remover { color: #963f32; }
+.campo { margin-top: 15px; }
 label { display: block; margin-bottom: 6px; font-weight: bold; }
 input, textarea, select {
-  width: 100%; padding: 12px; border: 1px solid #d5c8b5;
-  border-radius: 6px; background: white; font: 15px Arial, sans-serif;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d5c8b5;
+  border-radius: 6px;
+  background: white;
+  font: 15px Arial, sans-serif;
 }
-textarea { min-height: 70px; resize: vertical; }
+textarea { min-height: 75px; resize: vertical; }
 .total {
-  display: flex; justify-content: space-between; margin: 20px 0;
-  color: var(--verde); font-size: 21px; font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  margin: 22px 0;
+  color: var(--verde);
+  font: bold 21px Arial, sans-serif;
 }
 .enviar {
-  width: 100%; border: 0; border-radius: 6px; padding: 15px;
-  background: var(--verde); color: white; font-size: 16px;
-  font-weight: bold; cursor: pointer;
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  background: var(--verde);
+  color: white;
+  border: 0;
+  border-radius: 6px;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
 }
-.aviso { color: #766b59; font: 12px/1.5 Arial, sans-serif; }
+.enviar:hover { background: #285744; }
+.aviso { color: #766b59; font: 12px/1.6 Arial, sans-serif; }
 footer {
-  background: var(--verde); color: white; text-align: center;
-  padding: 25px 15px; line-height: 1.8;
+  background: var(--verde);
+  color: white;
+  text-align: center;
+  padding: 28px 15px;
+  line-height: 1.8;
+  border-top: 4px solid var(--dourado);
 }
 footer small { color: #e7c783; }
-@media (max-width: 430px) {
-  main { padding-left: 14px; padding-right: 14px; }
+
+@media (max-width: 700px) {
+  .lista-produtos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .foto-container { height: 160px; }
+  .item-info { padding: 11px; }
   .item h3 { font-size: 17px; }
+  .item p { font-size: 12px; min-height: 58px; }
   .preco { font-size: 15px; }
+  .adicionar { padding: 9px; font-size: 12px; }
+}
+@media (max-width: 360px) {
+  .lista-produtos { grid-template-columns: 1fr; }
+  .foto-container { height: 210px; }
 }
 </style>
 </head>
+
 <body>
 <header>
   <div class="selo">Tradizione · Sapore · Amore</div>
@@ -122,29 +224,29 @@ footer small { color: #e7c783; }
     Feito com carinho para compartilhar bons momentos.
   </div>
 
-  <nav aria-label="Categorias do cardápio">
-    <button onclick="ir('pizzas')">🍕 Pizzas</button>
-    <button onclick="ir('doces')">🍫 Doces</button>
-    <button onclick="ir('bebidas')">🥤 Bebidas</button>
-    <button onclick="ir('pedido')">🛒 Meu pedido</button>
+  <nav>
+    <a href="#pizzas">🍕 Pizzas</a>
+    <a href="#doces">🍫 Doces</a>
+    <a href="#bebidas">🥤 Bebidas</a>
+    <a href="#pedido">🛒 Meu pedido</a>
   </nav>
 
   <section id="pizzas">
     <h2>Le Nostre Pizze</h2>
-    <div class="sub">Nossas pizzas · valores de exemplo</div>
-    <div id="lista-pizzas"></div>
+    <div class="sub">Nossas pizzas · confira os preços com a pizzaria</div>
+    <div class="lista-produtos" id="lista-pizzas"></div>
   </section>
 
   <section id="doces">
     <h2>Dolci</h2>
     <div class="sub">Um toque doce para terminar</div>
-    <div id="lista-doces"></div>
+    <div class="lista-produtos" id="lista-doces"></div>
   </section>
 
   <section id="bebidas">
     <h2>Bevande</h2>
     <div class="sub">Para acompanhar seu pedido</div>
-    <div id="lista-bebidas"></div>
+    <div class="lista-produtos" id="lista-bebidas"></div>
   </section>
 
   <section class="pedido" id="pedido">
@@ -153,7 +255,7 @@ footer small { color: #e7c783; }
     <div class="total"><span>Total</span><span id="total">R$ 0,00</span></div>
 
     <div class="campo">
-      <label for="cliente">Seu nome</label>
+      <label for="cliente">Seu nome *</label>
       <input id="cliente" placeholder="Como podemos te chamar?">
     </div>
     <div class="campo">
@@ -163,16 +265,16 @@ footer small { color: #e7c783; }
         <option value="Retirada no local">Retirada no local</option>
       </select>
     </div>
-    <div class="campo">
-      <label for="endereco">Endereço (para entrega)</label>
+    <div class="campo" id="campo-endereco">
+      <label for="endereco">Endereço para entrega *</label>
       <input id="endereco" placeholder="Rua, número e bairro">
     </div>
     <div class="campo">
       <label for="observacoes">Observações</label>
       <textarea id="observacoes" placeholder="Ex.: sem cebola, ponto de referência..."></textarea>
     </div>
-    <button class="enviar" onclick="enviarPedido()">Enviar pedido pelo WhatsApp</button>
-    <p class="aviso">O pedido será enviado para confirmação pelo WhatsApp. Valores e disponibilidade devem ser confirmados com a pizzaria.</p>
+    <button class="enviar" id="botao-enviar">Enviar pedido pelo WhatsApp</button>
+    <p class="aviso">Os valores são exemplos. O pedido será enviado para confirmação pela pizzaria.</p>
   </section>
 </main>
 
@@ -184,17 +286,17 @@ footer small { color: #e7c783; }
 
 <script>
 const produtos = [
-  {id:1,cat:"pizzas",nome:"Margherita",desc:"Molho de tomate, muçarela fresca, tomate e manjericão.",preco:39.90},
-  {id:2,cat:"pizzas",nome:"Calabresa",desc:"Muçarela, calabresa fatiada e cebola.",preco:42.90},
-  {id:3,cat:"pizzas",nome:"Quatro Queijos",desc:"Muçarela, provolone, parmesão e gorgonzola.",preco:47.90},
-  {id:4,cat:"pizzas",nome:"Frango com Catupiry",desc:"Frango temperado, muçarela e requeijão cremoso.",preco:46.90},
-  {id:5,cat:"pizzas",nome:"Portuguesa",desc:"Presunto, ovo, cebola, ervilha, muçarela e azeitona.",preco:46.90},
-  {id:6,cat:"pizzas",nome:"Pepperoni",desc:"Muçarela, pepperoni e molho especial da casa.",preco:49.90},
-  {id:7,cat:"doces",nome:"Chocolate",desc:"Chocolate cremoso em uma massa douradinha.",preco:35.90},
-  {id:8,cat:"doces",nome:"Banana com Canela",desc:"Banana, açúcar, canela e um toque de leite condensado.",preco:34.90},
-  {id:9,cat:"bebidas",nome:"Refrigerante lata",desc:"Lata de 350 ml. Consulte os sabores disponíveis.",preco:6.00},
-  {id:10,cat:"bebidas",nome:"Refrigerante 2 litros",desc:"Ideal para compartilhar à mesa.",preco:13.00},
-  {id:11,cat:"bebidas",nome:"Água mineral",desc:"Garrafa de 500 ml.",preco:4.00}
+  {id:1,cat:"pizzas",nome:"Margherita",desc:"Molho de tomate, muçarela fresca, tomate e manjericão.",preco:39.90,foto:"https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=80"},
+  {id:2,cat:"pizzas",nome:"Calabresa",desc:"Muçarela, calabresa fatiada e cebola.",preco:42.90,foto:"https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80"},
+  {id:3,cat:"pizzas",nome:"Quatro Queijos",desc:"Muçarela, provolone, parmesão e gorgonzola.",preco:47.90,foto:"https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&fit=crop&w=800&q=80"},
+  {id:4,cat:"pizzas",nome:"Frango com Catupiry",desc:"Frango temperado, muçarela e requeijão cremoso.",preco:46.90,foto:"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80"},
+  {id:5,cat:"pizzas",nome:"Portuguesa",desc:"Presunto, ovo, cebola, ervilha, muçarela e azeitona.",preco:46.90,foto:"https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=80"},
+  {id:6,cat:"pizzas",nome:"Pepperoni",desc:"Muçarela, pepperoni e molho especial da casa.",preco:49.90,foto:"https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80"},
+  {id:7,cat:"doces",nome:"Chocolate",desc:"Chocolate cremoso em uma massa douradinha.",preco:35.90,foto:"https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80"},
+  {id:8,cat:"doces",nome:"Banana com Canela",desc:"Banana, açúcar, canela e um toque de leite condensado.",preco:34.90,foto:"https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=800&q=80"},
+  {id:9,cat:"bebidas",nome:"Refrigerante lata",desc:"Lata de 350 ml. Consulte os sabores disponíveis.",preco:6.00,foto:"https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80"},
+  {id:10,cat:"bebidas",nome:"Refrigerante 2 litros",desc:"Ideal para compartilhar.",preco:13.00,foto:"https://images.unsplash.com/photo-1532634896-26909d0d4b79?auto=format&fit=crop&w=800&q=80"},
+  {id:11,cat:"bebidas",nome:"Água mineral",desc:"Garrafa de 500 ml.",preco:4.00,foto:"https://images.unsplash.com/photo-1523362628745-0c100150b504?auto=format&fit=crop&w=800&q=80"}
 ];
 
 const carrinho = {};
@@ -203,25 +305,46 @@ const dinheiro = n => n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"}
 function mostrarProdutos(){
   ["pizzas","doces","bebidas"].forEach(cat=>{
     const area=document.getElementById("lista-"+cat);
-    area.innerHTML="";
+    area.replaceChildren();
+
     produtos.filter(p=>p.cat===cat).forEach(p=>{
       const el=document.createElement("article");
       el.className="item";
+
+      const foto=document.createElement("div");
+      foto.className="foto-container";
+
+      const img=document.createElement("img");
+      img.src=p.foto;
+      img.alt=p.nome;
+      img.loading="lazy";
+      img.onerror=()=>{foto.style.display="none";};
+      foto.appendChild(img);
+
       const info=document.createElement("div");
+      info.className="item-info";
+
       const nome=document.createElement("h3");
       nome.textContent=p.nome;
+
       const desc=document.createElement("p");
       desc.textContent=p.desc;
-      info.append(nome,desc);
-      const lado=document.createElement("div");
-      lado.className="preco";
-      lado.textContent=dinheiro(p.preco);
+
+      const bottom=document.createElement("div");
+      bottom.className="item-bottom";
+
+      const preco=document.createElement("span");
+      preco.className="preco";
+      preco.textContent=dinheiro(p.preco);
+
       const btn=document.createElement("button");
       btn.className="adicionar";
       btn.textContent="+ Adicionar";
       btn.onclick=()=>adicionar(p.id);
-      lado.appendChild(btn);
-      el.append(info,lado);
+
+      bottom.append(preco,btn);
+      info.append(nome,desc,bottom);
+      el.append(foto,info);
       area.appendChild(el);
     });
   });
@@ -240,45 +363,65 @@ function mudar(id,delta){
 
 function atualizarCarrinho(){
   const area=document.getElementById("carrinho");
-  area.innerHTML="";
+  area.replaceChildren();
   const ids=Object.keys(carrinho);
+  let total=0;
+
   if(!ids.length){
     area.textContent="Seu carrinho está vazio. Adicione algo do cardápio!";
   }
-  let total=0;
+
   ids.forEach(id=>{
     const p=produtos.find(x=>x.id===Number(id));
     const qtd=carrinho[id];
     total+=p.preco*qtd;
+
     const linha=document.createElement("div");
     linha.className="linha-carrinho";
+
     const nome=document.createElement("span");
     nome.textContent=p.nome+" × "+qtd+" — "+dinheiro(p.preco*qtd);
+
     const controles=document.createElement("span");
+    controles.className="controles";
+
     const menos=document.createElement("button");
     menos.textContent="−";
+    menos.setAttribute("aria-label","Diminuir quantidade");
     menos.onclick=()=>mudar(p.id,-1);
+
     const mais=document.createElement("button");
     mais.textContent="+";
+    mais.setAttribute("aria-label","Aumentar quantidade");
     mais.onclick=()=>adicionar(p.id);
-    controles.append(menos,document.createTextNode(" "),mais);
+
+    const remover=document.createElement("button");
+    remover.className="remover";
+    remover.textContent="Remover";
+    remover.onclick=()=>{delete carrinho[p.id];atualizarCarrinho();};
+
+    controles.append(menos,mais,remover);
     linha.append(nome,controles);
     area.appendChild(linha);
   });
+
   document.getElementById("total").textContent=dinheiro(total);
 }
 
-function ir(id){
-  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+function atualizarEndereco(){
+  const entrega=document.getElementById("tipo").value==="Entrega";
+  document.getElementById("campo-endereco").style.display=entrega?"block":"none";
 }
 
 function enviarPedido(){
   const ids=Object.keys(carrinho);
   if(!ids.length){alert("Adicione pelo menos um item ao pedido.");return;}
+
   const nome=document.getElementById("cliente").value.trim();
   const tipo=document.getElementById("tipo").value;
   const endereco=document.getElementById("endereco").value.trim();
   const obs=document.getElementById("observacoes").value.trim();
+
   if(!nome){alert("Por favor, informe seu nome.");return;}
   if(tipo==="Entrega"&&!endereco){alert("Informe seu endereço para entrega.");return;}
 
@@ -288,33 +431,39 @@ function enviarPedido(){
     total+=p.preco*carrinho[id];
     return `${carrinho[id]}x ${p.nome} — ${dinheiro(p.preco*carrinho[id])}`;
   });
+
   const msg=[
-    "🍕 *PEDIDO — LA BELLA RUTH*",
-    "",
+    "🍕 *PEDIDO — LA BELLA RUTH*","",
     "Cliente: "+nome,
     "Modalidade: "+tipo,
     ...(tipo==="Entrega"?["Endereço: "+endereco]:[]),
-    "",
-    ...linhas,
-    "",
+    "",...linhas,"",
     "*Total estimado: "+dinheiro(total)+"*",
     ...(obs?["Observações: "+obs]:[]),
-    "",
-    "Olá! Gostaria de confirmar este pedido."
+    "","Olá! Gostaria de confirmar este pedido."
   ].join("\n");
 
-  // Troque pelo número da pizzaria com código do país e DDD.
-  // Exemplo fictício: 11959566808
+  // Informe o WhatsApp da pizzaria com código do país e DDD.
+  // Exemplo fictício: 5511999999999
   const WHATSAPP_DA_PIZZARIA = "";
+
   if(!/^\d{10,15}$/.test(WHATSAPP_DA_PIZZARIA)){
-    alert("O cardápio está funcionando! Para receber pedidos, configure o número do WhatsApp da pizzaria no código.");
+    alert("As imagens e o cardápio estão prontos. Configure o número do WhatsApp no código para receber pedidos.");
     return;
   }
-  window.open("https://wa.me/"+WHATSAPP_DA_PIZZARIA+"?text="+encodeURIComponent(msg),"_blank");
+
+  window.open(
+    "https://wa.me/"+WHATSAPP_DA_PIZZARIA+"?text="+encodeURIComponent(msg),
+    "_blank"
+  );
 }
+
+document.getElementById("tipo").addEventListener("change",atualizarEndereco);
+document.getElementById("botao-enviar").addEventListener("click",enviarPedido);
 
 mostrarProdutos();
 atualizarCarrinho();
+atualizarEndereco();
 </script>
 </body>
 </html>
