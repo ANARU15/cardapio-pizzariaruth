@@ -14,35 +14,76 @@
   --dourado: #c49a52;
   --texto: #302c25;
 }
+
 * { box-sizing: border-box; }
+
 html { scroll-behavior: smooth; }
+
 body {
   margin: 0;
   background: var(--creme);
   color: var(--texto);
   font-family: Georgia, "Times New Roman", serif;
 }
+
 header {
   text-align: center;
-  padding: 42px 16px 32px;
+  padding: 38px 16px 32px;
   background: var(--verde);
   color: white;
   border-bottom: 4px solid var(--dourado);
 }
+
 .selo {
   color: #e7c783;
   letter-spacing: 4px;
   font: 12px Arial, sans-serif;
   text-transform: uppercase;
 }
-h1 { font-size: clamp(36px, 8vw, 56px); margin: 13px 0 8px; }
-header p { margin: 0; color: #f2e7d0; font-style: italic; }
-main { max-width: 1000px; margin: auto; padding: 22px 16px 50px; }
-.intro { text-align: center; line-height: 1.7; margin: 15px 0 28px; }
-nav {
-  display: flex; flex-wrap: wrap; gap: 8px;
-  justify-content: center; margin: 20px 0 35px;
+
+h1 {
+  font-size: clamp(36px, 8vw, 56px);
+  margin: 13px 0 8px;
 }
+
+header p {
+  margin: 0 0 25px;
+  color: #f2e7d0;
+  font-style: italic;
+}
+
+/* Única imagem do site: destaque da pizzaria */
+.imagem-principal {
+  display: block;
+  width: min(100%, 720px);
+  height: clamp(200px, 42vw, 340px);
+  margin: 0 auto;
+  object-fit: cover;
+  object-position: center;
+  border: 3px solid var(--dourado);
+  border-radius: 12px;
+}
+
+main {
+  max-width: 1000px;
+  margin: auto;
+  padding: 22px 16px 50px;
+}
+
+.intro {
+  text-align: center;
+  line-height: 1.7;
+  margin: 15px 0 28px;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin: 20px 0 35px;
+}
+
 nav a {
   text-decoration: none;
   background: transparent;
@@ -50,70 +91,83 @@ nav a {
   color: var(--verde);
   padding: 10px 14px;
   border-radius: 22px;
-  cursor: pointer;
   font: bold 13px Arial, sans-serif;
+  transition: .2s;
 }
-nav a:hover { background: var(--verde); color: white; }
+
+nav a:hover {
+  background: var(--verde);
+  color: white;
+}
+
 h2 {
-  color: var(--verde); text-align: center;
-  font-size: 29px; margin: 35px 0 7px;
+  color: var(--verde);
+  text-align: center;
+  font-size: 29px;
+  margin: 35px 0 7px;
 }
+
 .sub {
   text-align: center;
   color: #766b59;
   font-style: italic;
   margin-bottom: 23px;
 }
+
 .lista-produtos {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
 }
+
 .item {
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: white;
   border: 1px solid #e4d8c4;
   border-radius: 12px;
-  overflow: hidden;
+  padding: 18px;
   box-shadow: 0 4px 14px #183f3210;
   transition: transform .2s;
 }
-.item:hover { transform: translateY(-3px); }
-.foto-container {
-  height: 200px;
-  background: #eee4d5;
-  overflow: hidden;
+
+.item:hover {
+  transform: translateY(-3px);
 }
-.item img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
+
+.item-info {
+  flex: 1;
 }
-.item-info { padding: 15px; }
+
 .item h3 {
-  margin: 0 0 8px;
+  margin: 0 0 10px;
   color: var(--verde);
   font-size: 19px;
 }
+
 .item p {
-  margin: 0 0 15px;
+  margin: 0 0 18px;
   color: #71685b;
   font: 13px/1.6 Arial, sans-serif;
-  min-height: 42px;
 }
+
 .item-bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
   flex-wrap: wrap;
+  margin-top: auto;
 }
+
 .preco {
   color: var(--verde);
   font: bold 17px Arial, sans-serif;
   white-space: nowrap;
 }
+
 .adicionar {
   padding: 10px 11px;
   background: var(--verde);
@@ -123,7 +177,12 @@ h2 {
   cursor: pointer;
   font-weight: bold;
 }
-.adicionar:hover { background: var(--dourado); color: #201b12; }
+
+.adicionar:hover {
+  background: var(--dourado);
+  color: #201b12;
+}
+
 .pedido {
   background: white;
   border: 1px solid #e4d8c4;
@@ -131,7 +190,9 @@ h2 {
   padding: 22px;
   margin-top: 40px;
 }
+
 .pedido h2 { margin-top: 0; }
+
 .linha-carrinho {
   display: flex;
   align-items: center;
@@ -141,7 +202,14 @@ h2 {
   border-bottom: 1px solid #eee4d5;
   font: 14px/1.5 Arial, sans-serif;
 }
-.controles { display: flex; align-items: center; gap: 6px; }
+
+.controles {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
 .controles button {
   border: 0;
   background: #f3e8d7;
@@ -150,9 +218,17 @@ h2 {
   border-radius: 4px;
   cursor: pointer;
 }
+
 .controles .remover { color: #963f32; }
+
 .campo { margin-top: 15px; }
-label { display: block; margin-bottom: 6px; font-weight: bold; }
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
 input, textarea, select {
   width: 100%;
   padding: 12px;
@@ -161,14 +237,21 @@ input, textarea, select {
   background: white;
   font: 15px Arial, sans-serif;
 }
-textarea { min-height: 75px; resize: vertical; }
+
+textarea {
+  min-height: 75px;
+  resize: vertical;
+}
+
 .total {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
   margin: 22px 0;
   color: var(--verde);
   font: bold 21px Arial, sans-serif;
 }
+
 .enviar {
   display: block;
   width: 100%;
@@ -182,8 +265,14 @@ textarea { min-height: 75px; resize: vertical; }
   font-weight: bold;
   cursor: pointer;
 }
+
 .enviar:hover { background: #285744; }
-.aviso { color: #766b59; font: 12px/1.6 Arial, sans-serif; }
+
+.aviso {
+  color: #766b59;
+  font: 12px/1.6 Arial, sans-serif;
+}
+
 footer {
   background: var(--verde);
   color: white;
@@ -192,29 +281,42 @@ footer {
   line-height: 1.8;
   border-top: 4px solid var(--dourado);
 }
+
 footer small { color: #e7c783; }
 
 @media (max-width: 700px) {
-  .lista-produtos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-  .foto-container { height: 160px; }
-  .item-info { padding: 11px; }
+  .lista-produtos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .item { padding: 13px; }
   .item h3 { font-size: 17px; }
-  .item p { font-size: 12px; min-height: 58px; }
+  .item p { font-size: 12px; }
   .preco { font-size: 15px; }
   .adicionar { padding: 9px; font-size: 12px; }
+  .linha-carrinho { flex-wrap: wrap; }
 }
+
 @media (max-width: 360px) {
   .lista-produtos { grid-template-columns: 1fr; }
-  .foto-container { height: 210px; }
 }
 </style>
 </head>
 
 <body>
+
 <header>
   <div class="selo">Tradizione · Sapore · Amore</div>
   <h1>La Bella Ruth</h1>
   <p>Uma experiência deliciosa a cada pedaço</p>
+
+  <!-- Única imagem do site -->
+  <img
+    class="imagem-principal"
+    src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1200&q=85"
+    alt="Pizza artesanal da La Bella Ruth"
+  >
 </header>
 
 <main>
@@ -251,13 +353,21 @@ footer small { color: #e7c783; }
 
   <section class="pedido" id="pedido">
     <h2>Seu pedido</h2>
-    <div id="carrinho">Seu carrinho está vazio. Adicione algo do cardápio!</div>
-    <div class="total"><span>Total</span><span id="total">R$ 0,00</span></div>
+
+    <div id="carrinho">
+      Seu carrinho está vazio. Adicione algo do cardápio!
+    </div>
+
+    <div class="total">
+      <span>Total</span>
+      <span id="total">R$ 0,00</span>
+    </div>
 
     <div class="campo">
       <label for="cliente">Seu nome *</label>
       <input id="cliente" placeholder="Como podemos te chamar?">
     </div>
+
     <div class="campo">
       <label for="tipo">Como deseja receber?</label>
       <select id="tipo">
@@ -265,16 +375,24 @@ footer small { color: #e7c783; }
         <option value="Retirada no local">Retirada no local</option>
       </select>
     </div>
+
     <div class="campo" id="campo-endereco">
       <label for="endereco">Endereço para entrega *</label>
       <input id="endereco" placeholder="Rua, número e bairro">
     </div>
+
     <div class="campo">
       <label for="observacoes">Observações</label>
       <textarea id="observacoes" placeholder="Ex.: sem cebola, ponto de referência..."></textarea>
     </div>
-    <button class="enviar" id="botao-enviar">Enviar pedido pelo WhatsApp</button>
-    <p class="aviso">Os valores são exemplos. O pedido será enviado para confirmação pela pizzaria.</p>
+
+    <button class="enviar" id="botao-enviar">
+      Enviar pedido pelo WhatsApp
+    </button>
+
+    <p class="aviso">
+      Os valores são exemplos. O pedido será enviado para confirmação pela pizzaria.
+    </p>
   </section>
 </main>
 
@@ -286,43 +404,37 @@ footer small { color: #e7c783; }
 
 <script>
 const produtos = [
-  {id:1,cat:"pizzas",nome:"Margherita",desc:"Molho de tomate, muçarela fresca, tomate e manjericão.",preco:39.90,foto:"https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=80"},
-  {id:2,cat:"pizzas",nome:"Calabresa",desc:"Muçarela, calabresa fatiada e cebola.",preco:42.90,foto:"https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80"},
-  {id:3,cat:"pizzas",nome:"Quatro Queijos",desc:"Muçarela, provolone, parmesão e gorgonzola.",preco:47.90,foto:"https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&fit=crop&w=800&q=80"},
-  {id:4,cat:"pizzas",nome:"Frango com Catupiry",desc:"Frango temperado, muçarela e requeijão cremoso.",preco:46.90,foto:"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80"},
-  {id:5,cat:"pizzas",nome:"Portuguesa",desc:"Presunto, ovo, cebola, ervilha, muçarela e azeitona.",preco:46.90,foto:"https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=80"},
-  {id:6,cat:"pizzas",nome:"Pepperoni",desc:"Muçarela, pepperoni e molho especial da casa.",preco:49.90,foto:"https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80"},
-  {id:7,cat:"doces",nome:"Chocolate",desc:"Chocolate cremoso em uma massa douradinha.",preco:35.90,foto:"https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80"},
-  {id:8,cat:"doces",nome:"Banana com Canela",desc:"Banana, açúcar, canela e um toque de leite condensado.",preco:34.90,foto:"https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=800&q=80"},
-  {id:9,cat:"bebidas",nome:"Refrigerante lata",desc:"Lata de 350 ml. Consulte os sabores disponíveis.",preco:6.00,foto:"https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80"},
-  {id:10,cat:"bebidas",nome:"Refrigerante 2 litros",desc:"Ideal para compartilhar.",preco:13.00,foto:"https://images.unsplash.com/photo-1532634896-26909d0d4b79?auto=format&fit=crop&w=800&q=80"},
-  {id:11,cat:"bebidas",nome:"Água mineral",desc:"Garrafa de 500 ml.",preco:4.00,foto:"https://images.unsplash.com/photo-1523362628745-0c100150b504?auto=format&fit=crop&w=800&q=80"}
+  {id:1,cat:"pizzas",nome:"Margherita",desc:"Molho de tomate, muçarela fresca, tomate e manjericão.",preco:39.90},
+  {id:2,cat:"pizzas",nome:"Calabresa",desc:"Muçarela, calabresa fatiada e cebola.",preco:42.90},
+  {id:3,cat:"pizzas",nome:"Quatro Queijos",desc:"Muçarela, provolone, parmesão e gorgonzola.",preco:47.90},
+  {id:4,cat:"pizzas",nome:"Frango com Catupiry",desc:"Frango temperado, muçarela e requeijão cremoso.",preco:46.90},
+  {id:5,cat:"pizzas",nome:"Portuguesa",desc:"Presunto, ovo, cebola, ervilha, muçarela e azeitona.",preco:46.90},
+  {id:6,cat:"pizzas",nome:"Pepperoni",desc:"Muçarela, pepperoni e molho especial da casa.",preco:49.90},
+  {id:7,cat:"doces",nome:"Chocolate",desc:"Chocolate cremoso em uma massa douradinha.",preco:35.90},
+  {id:8,cat:"doces",nome:"Banana com Canela",desc:"Banana, açúcar, canela e um toque de leite condensado.",preco:34.90},
+  {id:9,cat:"bebidas",nome:"Refrigerante lata",desc:"Lata de 350 ml. Consulte os sabores disponíveis.",preco:6.00},
+  {id:10,cat:"bebidas",nome:"Refrigerante 2 litros",desc:"Ideal para compartilhar.",preco:13.00},
+  {id:11,cat:"bebidas",nome:"Água mineral",desc:"Garrafa de 500 ml.",preco:4.00}
 ];
 
 const carrinho = {};
-const dinheiro = n => n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+
+const dinheiro = n => n.toLocaleString("pt-BR", {
+  style: "currency",
+  currency: "BRL"
+});
 
 function mostrarProdutos() {
   ["pizzas", "doces", "bebidas"].forEach(cat => {
     const area = document.getElementById("lista-" + cat);
-    area.innerHTML = "";
+    area.replaceChildren();
 
     produtos.filter(p => p.cat === cat).forEach(p => {
       const el = document.createElement("article");
       el.className = "item";
 
-      const img = document.createElement("img");
-      img.className = "foto-produto";
-      img.src = p.foto || "";
-      img.alt = p.nome;
-      img.loading = "lazy";
-
-      img.onerror = () => {
-        img.style.display = "none";
-      };
-
       const info = document.createElement("div");
-      info.className = "info-produto";
+      info.className = "item-info";
 
       const nome = document.createElement("h3");
       nome.textContent = p.nome;
@@ -333,9 +445,10 @@ function mostrarProdutos() {
       info.append(nome, desc);
 
       const lado = document.createElement("div");
-      lado.className = "preco";
+      lado.className = "item-bottom";
 
       const valor = document.createElement("span");
+      valor.className = "preco";
       valor.textContent = dinheiro(p.preco);
 
       const btn = document.createElement("button");
@@ -344,126 +457,166 @@ function mostrarProdutos() {
       btn.onclick = () => adicionar(p.id);
 
       lado.append(valor, btn);
-      el.append(img, info, lado);
+      el.append(info, lado);
       area.appendChild(el);
     });
   });
 }
 
-function adicionar(id){
-  carrinho[id]=(carrinho[id]||0)+1;
+function adicionar(id) {
+  carrinho[id] = (carrinho[id] || 0) + 1;
   atualizarCarrinho();
 }
 
-function mudar(id,delta){
-  carrinho[id]=(carrinho[id]||0)+delta;
-  if(carrinho[id]<=0) delete carrinho[id];
-  atualizarCarrinho();
-}
+function mudar(id, delta) {
+  carrinho[id] = (carrinho[id] || 0) + delta;
 
-function atualizarCarrinho(){
-  const area=document.getElementById("carrinho");
-  area.replaceChildren();
-  const ids=Object.keys(carrinho);
-  let total=0;
-
-  if(!ids.length){
-    area.textContent="Seu carrinho está vazio. Adicione algo do cardápio!";
+  if (carrinho[id] <= 0) {
+    delete carrinho[id];
   }
 
-  ids.forEach(id=>{
-    const p=produtos.find(x=>x.id===Number(id));
-    const qtd=carrinho[id];
-    total+=p.preco*qtd;
+  atualizarCarrinho();
+}
 
-    const linha=document.createElement("div");
-    linha.className="linha-carrinho";
+function atualizarCarrinho() {
+  const area = document.getElementById("carrinho");
+  area.replaceChildren();
 
-    const nome=document.createElement("span");
-    nome.textContent=p.nome+" × "+qtd+" — "+dinheiro(p.preco*qtd);
+  const ids = Object.keys(carrinho);
+  let total = 0;
 
-    const controles=document.createElement("span");
-    controles.className="controles";
+  if (!ids.length) {
+    area.textContent = "Seu carrinho está vazio. Adicione algo do cardápio!";
+  }
 
-    const menos=document.createElement("button");
-    menos.textContent="−";
-    menos.setAttribute("aria-label","Diminuir quantidade");
-    menos.onclick=()=>mudar(p.id,-1);
+  ids.forEach(id => {
+    const p = produtos.find(x => x.id === Number(id));
+    const qtd = carrinho[id];
 
-    const mais=document.createElement("button");
-    mais.textContent="+";
-    mais.setAttribute("aria-label","Aumentar quantidade");
-    mais.onclick=()=>adicionar(p.id);
+    total += p.preco * qtd;
 
-    const remover=document.createElement("button");
-    remover.className="remover";
-    remover.textContent="Remover";
-    remover.onclick=()=>{delete carrinho[p.id];atualizarCarrinho();};
+    const linha = document.createElement("div");
+    linha.className = "linha-carrinho";
 
-    controles.append(menos,mais,remover);
-    linha.append(nome,controles);
+    const nome = document.createElement("span");
+    nome.textContent = p.nome + " × " + qtd + " — " +
+      dinheiro(p.preco * qtd);
+
+    const controles = document.createElement("span");
+    controles.className = "controles";
+
+    const menos = document.createElement("button");
+    menos.textContent = "−";
+    menos.setAttribute("aria-label", "Diminuir quantidade");
+    menos.onclick = () => mudar(p.id, -1);
+
+    const mais = document.createElement("button");
+    mais.textContent = "+";
+    mais.setAttribute("aria-label", "Aumentar quantidade");
+    mais.onclick = () => adicionar(p.id);
+
+    const remover = document.createElement("button");
+    remover.className = "remover";
+    remover.textContent = "Remover";
+    remover.onclick = () => {
+      delete carrinho[p.id];
+      atualizarCarrinho();
+    };
+
+    controles.append(menos, mais, remover);
+    linha.append(nome, controles);
     area.appendChild(linha);
   });
 
-  document.getElementById("total").textContent=dinheiro(total);
+  document.getElementById("total").textContent = dinheiro(total);
 }
 
-function atualizarEndereco(){
-  const entrega=document.getElementById("tipo").value==="Entrega";
-  document.getElementById("campo-endereco").style.display=entrega?"block":"none";
+function atualizarEndereco() {
+  const entrega = document.getElementById("tipo").value === "Entrega";
+
+  document.getElementById("campo-endereco").style.display =
+    entrega ? "block" : "none";
 }
 
-function enviarPedido(){
-  const ids=Object.keys(carrinho);
-  if(!ids.length){alert("Adicione pelo menos um item ao pedido.");return;}
+function enviarPedido() {
+  const ids = Object.keys(carrinho);
 
-  const nome=document.getElementById("cliente").value.trim();
-  const tipo=document.getElementById("tipo").value;
-  const endereco=document.getElementById("endereco").value.trim();
-  const obs=document.getElementById("observacoes").value.trim();
+  if (!ids.length) {
+    alert("Adicione pelo menos um item ao pedido.");
+    return;
+  }
 
-  if(!nome){alert("Por favor, informe seu nome.");return;}
-  if(tipo==="Entrega"&&!endereco){alert("Informe seu endereço para entrega.");return;}
+  const nome = document.getElementById("cliente").value.trim();
+  const tipo = document.getElementById("tipo").value;
+  const endereco = document.getElementById("endereco").value.trim();
+  const obs = document.getElementById("observacoes").value.trim();
 
-  let total=0;
-  const linhas=ids.map(id=>{
-    const p=produtos.find(x=>x.id===Number(id));
-    total+=p.preco*carrinho[id];
-    return `${carrinho[id]}x ${p.nome} — ${dinheiro(p.preco*carrinho[id])}`;
+  if (!nome) {
+    alert("Por favor, informe seu nome.");
+    return;
+  }
+
+  if (tipo === "Entrega" && !endereco) {
+    alert("Informe seu endereço para entrega.");
+    return;
+  }
+
+  let total = 0;
+
+  const linhas = ids.map(id => {
+    const p = produtos.find(x => x.id === Number(id));
+    total += p.preco * carrinho[id];
+
+    return `${carrinho[id]}x ${p.nome} — ${
+      dinheiro(p.preco * carrinho[id])
+    }`;
   });
 
-  const msg=[
-    "🍕 *PEDIDO — LA BELLA RUTH*","",
-    "Cliente: "+nome,
-    "Modalidade: "+tipo,
-    ...(tipo==="Entrega"?["Endereço: "+endereco]:[]),
-    "",...linhas,"",
-    "*Total estimado: "+dinheiro(total)+"*",
-    ...(obs?["Observações: "+obs]:[]),
-    "","Olá! Gostaria de confirmar este pedido."
+  const msg = [
+    "🍕 *PEDIDO — LA BELLA RUTH*",
+    "",
+    "Cliente: " + nome,
+    "Modalidade: " + tipo,
+    ...(tipo === "Entrega" ? ["Endereço: " + endereco] : []),
+    "",
+    ...linhas,
+    "",
+    "*Total estimado: " + dinheiro(total) + "*",
+    ...(obs ? ["Observações: " + obs] : []),
+    "",
+    "Olá! Gostaria de confirmar este pedido."
   ].join("\n");
 
-  // Informe o WhatsApp da pizzaria com código do país e DDD.
-  // Exemplo fictício: 11959566808
+  // Coloque o número da pizzaria com código do país e DDD.
+  // Exemplo fictício: 5511999999999
   const WHATSAPP_DA_PIZZARIA = "";
 
-  if(!/^\d{10,15}$/.test(WHATSAPP_DA_PIZZARIA)){
-    alert("As imagens e o cardápio estão prontos. Configure o número do WhatsApp no código para receber pedidos.");
+  if (!/^\d{10,15}$/.test(WHATSAPP_DA_PIZZARIA)) {
+    alert("Configure o número do WhatsApp da pizzaria no código para receber pedidos.");
     return;
   }
 
   window.open(
-    "https://wa.me/"+WHATSAPP_DA_PIZZARIA+"?text="+encodeURIComponent(msg),
+    "https://wa.me/" + WHATSAPP_DA_PIZZARIA +
+    "?text=" + encodeURIComponent(msg),
     "_blank"
   );
 }
 
-document.getElementById("tipo").addEventListener("change",atualizarEndereco);
-document.getElementById("botao-enviar").addEventListener("click",enviarPedido);
+document.getElementById("tipo").addEventListener(
+  "change",
+  atualizarEndereco
+);
+
+document.getElementById("botao-enviar").addEventListener(
+  "click",
+  enviarPedido
+);
 
 mostrarProdutos();
 atualizarCarrinho();
 atualizarEndereco();
 </script>
+
 </body>
 </html>
